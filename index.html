@@ -1,1 +1,107 @@
+<!DOCTYPE html>
+<html lang = "pt-Br">
+<head>
+    <meta charset = "utf-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title> Recicla+ | Reciclagem e Meio Ambiente</title>
+    
+</head>
 
+<body>
+    <form method="post" action="/">
+    <input type="text" name="material" required>
+    <button type="submit">Consultar</button>
+
+    {% if resultado %}
+    <p class="resultado">{{ resultado }}</p>
+{% endif %}
+</form>
+    <header>
+        <h1>Recicla+</h1>
+        <nav>
+            <a href="#inicio">Início</a>
+            <a href="#reciclagem">reciclagem</a>
+            <a href="#materiais">materiais</a>
+            <a href="#sobre">sobre</a>
+        </nav>
+    </header>
+
+</body>
+<main>
+    <section id="inicio">
+        <h2>Bem-vindo ao Recicla+</h2>
+        <p> A Reciclagem é uma forma de reutilização de materiais que contribuiu para a preservação do meio ambiente
+            </p>
+            <a href="reciclagem">Aprenda a reciclagem</a>
+            </section>
+
+<section id="materiais">
+    <h2>Materiais Recicláveis</h2>
+    <p> Conheça os principais materiais que podem ser reciclados e contribuem para a preservação do meio ambiente
+        </p>
+        <div>
+            <article>
+                <h3>♻️ Plástico</h3>
+                <p> Garrafas PET, embalagens e alguns tipos de recipientes plásticos podem ser reciclados </p>
+
+            </article>
+
+            <article>
+                <h3>♻️ Papel</h3>
+                <p> Jornais , revistas , caixa de papelão e folhas podem ser reciclados </p>
+            </article>
+
+            <article>
+                <h3>♻️ Vidro</h3>
+                <p> Garrafas e potes de vidro podem ser reciclados </p>
+            </article>
+
+            <article>
+                <h3>♻️ Metal</h3>
+                <p> Latas de alumínio, latas de aço e outros metais podem ser reciclados.  </p>
+            </article>
+        </div>
+</section>
+    </section>
+
+    <section id="reciclagem">
+
+            <h2>Como reciclar?</h2>
+
+            <p>
+                Pequenas atitudes podem fazer uma grande diferença para o meio ambiente.
+            </p>
+
+            <ol>
+                <li>Separe os materiais recicláveis do lixo comum.</li>
+                <li>Limpe as embalagens quando necessário.</li>
+                <li>Separe papel, plástico, vidro e metal.</li>
+                <li>Procure um ponto de coleta ou serviço de coleta seletiva.</li>
+            </ol>
+
+        </section>
+
+
+        <section id="sobre">
+
+            <h2>Sobre o projeto</h2>
+
+            <p>
+                O Recicla+ é um projeto criado para incentivar a conscientização
+                sobre a importância da reciclagem e do descarte correto dos resíduos.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>&copy; 2026 Recicla+ - Projeto de Reciclagem</p>
+
+    </footer>
+
+</html>
+</html>
