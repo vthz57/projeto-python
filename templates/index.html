@@ -1,31 +1,121 @@
-from flask import Flask, render_template, request
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-app = Flask(__name__)
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-@app.route("/", methods=["GET", "POST"])
-def inicio():
+    <title>Recicla+ | Reciclagem e Meio Ambiente</title>
 
-    resultado = ""
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  
+</head>
 
-    descarte = {
-        "plastico": "Plástico deve ser descartado na lixeira vermelha",
-        "papel": "Lixeira azul - Folhas, jornais, revistas, cartazes, envelopes, papelão e caixas de papelão.",
-        "vidro": "Vidro deve ser descartado na lixeira verde.",
-        "metal": "Metal deve ser descartado na lixeira amarela.",
-        "residuos eletronicos": "Procure pontos de coleta de resíduos eletroeletrônicos. Não coloque equipamentos eletrônicos no lixo comum.",
-        "madeira": "Lixeira preta - Pallets, pedaços de madeira, caixas de madeira e outros resíduos de madeira.",
-        "residuos organicos": "Lixeira marrom - Restos de alimentos, cascas de frutas, verduras, legumes, folhas e outros resíduos orgânicos.",
-        "materiais medicos": "Procure lixeiras brancas para descartar materiais médicos.",
-        "materiais perigosos": "Lixeira laranja - Resíduos que apresentam riscos à saúde ou ao meio ambiente, como alguns produtos químicos e materiais contaminados.",
-        "residuos radioativos": "Lixeira roxa - Materiais contaminados ou provenientes de atividades que utilizam materiais radioativos.",
-        "rejeitos": "Lixeira cinza - Materiais que não podem ser reciclados ou reaproveitados, como papel higiênico, guardanapos sujos e resíduos contaminados."
-    }
+<body>
 
-    if request.method == "POST":
-        material = request.form["material"].lower()
-        resultado = descarte.get(material, "material não encontrado.")
+    <header>
+        <h1>♻️ Recicla+</h1>
 
-    return render_template("index.html", resultado=resultado)
+        <nav>
+            <a href="/">Início</a>
+            <a href="#reciclagem">Reciclagem</a>
+            <a href="#materiais">Materiais</a>
+            <a href="#sobre">Sobre</a>
+        </nav>
+    </header>
 
-if __name__ == "__main__":
-    app.run(debug=True)
+    <main>
+
+        <section class="hero" id="reciclagem">
+
+            <h2>Bem-vindo ao Recicla+ 🌱</h2>
+
+            <p>
+                A reciclagem é uma forma de reutilização de materiais
+                que contribui para a preservação do meio ambiente.
+            </p>
+
+            <a href="#materiais" class="btn">
+                Aprenda a reciclar
+            </a>
+
+        </section>
+
+        <form method="POST" action="/">
+        <label for="material">Escolha um material</label>
+            <select name="material" id="material">
+            <option value="">Selecione</option>
+            <option value="plastico">Plastico</option>
+            <option value="Vidro">Vidro</option>
+            <option value="papel">Papel</option>
+            <option value="metal">Metal</option>
+            <option value="residuos eletronicos">Residuos Eletronicos</option>
+            <option value="madeira">Madeira</option>
+            <option value="residuos organicos">Residuos Organicos</option>
+            <option value="materiais medicos">Materiais Medicos</option>
+            <option value="residuos radioativos">Residuos Radioativos</option>
+            <option value="rejeitos">Rejeitos</option>   
+            <button type="submit">Consultar</button>
+            </select>
+            <button type = "submit">Consultar</button>
+</form>
+
+<p>{{ resultado }}</p>
+       
+
+
+        <section class="materiais" id="materiais">
+
+            <h2>Materiais Recicláveis</h2>
+
+            <p>
+                Conheça os principais materiais que podem ser reciclados
+                e contribuem para a preservação do meio ambiente.
+            </p>
+
+
+            <div class="cards">
+
+                <div class="card">
+                    <h3>♻️ Plástico</h3>
+
+                    <p>
+                        Garrafas PET, embalagens e alguns tipos
+                        de recipientes plásticos podem ser reciclados.
+                    </p>
+                </div>
+
+
+                <div class="card">
+                    <h3>♻️ Papel</h3>
+
+                    <p>
+                        Jornais, revistas, caixas de papelão
+                        e folhas podem ser reciclados.
+                    </p>
+                </div>
+
+
+                <div class="card">
+                    <h3>♻️ Vidro</h3>
+
+                    <p>
+                        Garrafas, potes e outros recipientes
+                        de vidro podem ser reciclados.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer id="sobre">
+        <p>♻️ Recicla+ — Cuidando do planeta através da reciclagem.</p>
+    </footer>
+
+</body>
+
+</html>
