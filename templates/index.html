@@ -41,27 +41,130 @@
 
         </section>
 
-        <form method="POST" action="/">
+        
+        <div class="consulta">
+    <form id="formConsulta">
+
+
         <label for="material">Escolha um material</label>
-            <select name="material" id="material">
+        <select name="material" id="material">
             <option value="">Selecione</option>
-            <option value="plastico">Plastico</option>
-            <option value="Vidro">Vidro</option>
+            <option value="plastico">Plástico</option>
+            <option value="vidro">Vidro</option>
             <option value="papel">Papel</option>
             <option value="metal">Metal</option>
-            <option value="residuos eletronicos">Residuos Eletronicos</option>
+            <option value="residuoseletronicos">Resíduos Eletrônicos</option>
             <option value="madeira">Madeira</option>
-            <option value="residuos organicos">Residuos Organicos</option>
-            <option value="materiais medicos">Materiais Medicos</option>
-            <option value="residuos radioativos">Residuos Radioativos</option>
-            <option value="rejeitos">Rejeitos</option>   
-            <button type="submit">Consultar</button>
-            </select>
-            <button type = "submit">Consultar</button>
-</form>
+            <option value="residuosorganicos">Resíduos Orgânicos</option>
+            <option value="materiaismedicos">Materiais Médicos</option>
+            <option value="residuosradioativos">Resíduos Radioativos</option>
+            <option value="rejeitos">Rejeitos</option>
+        </select>
 
-<p>{{ resultado }}</p>
-       
+        <button type="button" onclick="consultarMaterial()">Consultar</button>
+    </form>
+</div>
+<!-- caizinha -->
+<div id="modalOverlay" class="modal-overlay">
+    <div class="modal-box">
+        <button class="modal-fechar" onclick="fecharModal()">&times;</button>
+        <h3 id="modalTitulo">♻️ Material</h3>
+        <p id="modalTexto">Descrição de como descartar.</p>
+    </div>
+</div>
+
+<style>
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .modal-overlay.ativo {
+        display: flex;
+    }
+
+    .modal-box {
+        background: #fff;
+        border-top: 6px solid #16a34a;
+        border-radius: 12px;
+        max-width: 400px;
+        width: 90%;
+        padding: 24px;
+        position: relative;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        text-align: left;
+    }
+
+    .modal-box h3 {
+        color: #16a34a;
+        margin-bottom: 12px;
+    }
+
+    .modal-box p {
+        color: #333;
+        line-height: 1.5;
+    }
+
+    .modal-fechar {
+        position: absolute;
+        top: 10px;
+        right: 14px;
+        background: none;
+        border: none;
+        font-size: 22px;
+        cursor: pointer;
+        color: #666;
+    }
+
+    .modal-fechar:hover {
+        color: #16a34a;
+    }
+</style>
+
+<script>
+    const infoReciclagem = {
+        plastico: { nome: "Plástico", texto: "Lave a embalagem, retire tampas e rótulos quando possível e descarte na coleta seletiva (lixeira vermelha)." },
+        vidro: { nome: "Vidro", texto: "Embale com cuidado para não quebrar durante o transporte e descarte na coleta seletiva (lixeira verde). Evite descartar vidros quebrados junto com outros recicláveis." },
+        papel: { nome: "Papel", texto: "Mantenha seco e limpo, sem gordura ou umidade. Descarte na coleta seletiva (lixeira azul)." },
+        metal: { nome: "Metal", texto: "Lave latas e embalagens metálicas antes de descartar na coleta seletiva (lixeira amarela)." },
+        residuoseletronicos: { nome: "Resíduos Eletrônicos", texto: "Não descarte no lixo comum. Leve a um ponto de coleta de eletrônicos (ecoponto) ou devolva ao fabricante/loja." },
+        madeira: { nome: "Madeira", texto: "Pequenos pedaços podem ir para pontos de coleta de resíduos volumosos ou ecopontos. Não é reciclável na coleta seletiva comum." },
+        residuosorganicos: { nome: "Resíduos Orgânicos", texto: "Destine à compostagem quando possível, ou à coleta orgânica municipal, se disponível na sua cidade." },
+        materiaismedicos: { nome: "Materiais Médicos", texto: "Não descarte no lixo comum. Leve a uma farmácia ou posto de saúde com ponto de coleta de medicamentos e materiais médicos." },
+        residuosradioativos: { nome: "Resíduos Radioativos", texto: "Nunca descarte em lixo comum ou reciclável. Procure orientação de órgãos ambientais/sanitários especializados (ex: CNEN)." },
+        rejeitos: { nome: "Rejeitos", texto: "Rejeitos não são recicláveis e devem ir para a coleta de lixo comum (não seletiva)." }
+    };
+
+    function consultarMaterial() {
+        const select = document.getElementById("material");
+        const valor = select.value;
+
+        if (!valor) {
+            alert("Por favor, selecione um material antes de consultar.");
+            return;
+        }
+
+        const info = infoReciclagem[valor];
+        document.getElementById("modalTitulo").textContent = "♻️ " + info.nome;
+        document.getElementById("modalTexto").textContent = info.texto;
+        document.getElementById("modalOverlay").classList.add("ativo");
+    }
+
+    function fecharModal() {
+        document.getElementById("modalOverlay").classList.remove("ativo");
+    }
+
+    // fecha clicando fora da caixinha
+    document.getElementById("modalOverlay").addEventListener("click", function(e) {
+        if (e.target === this) fecharModal();
+    });
+</script>
 
 
         <section class="materiais" id="materiais">
@@ -105,7 +208,71 @@
                     </p>
                 </div>
 
-            </div>
+            
+
+                <div class="card">
+                    <h3>♻️ Metais</h3>
+
+                    <p>
+                        Latas, fios, peças e alguns tipos 
+                        de objetos metálicos podem ser reciclados.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>♻️ Resíduos eletrônicos</h3>
+
+                    <p>
+                        Celulares, computadores, cabos, carregadores 
+                        e alguns tipos de equipamentos eletrônicos podem ser reciclados.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>♻️ Madeira</h3>
+
+                    <p>
+                        Móveis, caixas, pallets e 
+                        alguns tipos de objetos de madeira podem ser reciclados.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>♻️ Resíduos orgânicos.</h3>
+
+                    <p>
+                        Restos de alimentos, cascas de frutas, folhas 
+                        e alguns tipos de resíduos orgânicos podem ser reciclados.                   
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>♻️ Materiais médicos.</h3>
+
+                    <p>
+                        Seringas sem agulha, embalagens, frascos 
+                        e alguns tipos de materiais médicos podem ser reciclados.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>♻️ Resíduos radioativos.</h3>
+
+                    <p>
+                        Alguns materiais radioativos 
+                        e resíduos provenientes de atividades médicas, industriais 
+                        e de pesquisa podem ser destinados ao tratamento e descarte especializado.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>♻️ Rejeitos.</h3>
+
+                    <p>
+                        Materiais contaminados, resíduos não recicláveis 
+                        e alguns tipos de rejeitos podem ser destinados ao descarte adequado.
+                    </p>
+                </div>
 
         </section>
 
@@ -113,7 +280,7 @@
 
 
     <footer id="sobre">
-        <p>♻️ Recicla+ — Cuidando do planeta através da reciclagem.</p>
+        <p>♻️ Recicla+ — Cuidando do planeta através da reciclagem e da tecnologia.</p>
     </footer>
 
 </body>
